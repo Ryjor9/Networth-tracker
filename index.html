@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Worth Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <div class="nav-content">
+                <h1 class="app-title">💰 Net Worth Tracker</h1>
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="overview">Overview</button>
+                    <button class="nav-tab" data-tab="breakdown">Breakdown</button>
+                    <button class="nav-tab" data-tab="manage">Manage</button>
+                    <button class="nav-tab" data-tab="settings">Settings</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Overview Tab (Landing Page) -->
+        <div id="overview-tab" class="tab-content active">
+            <div class="overview-container">
+                <div class="net-worth-main-card">
+                    <h2 class="card-label">Total Net Worth</h2>
+                    <div class="net-worth-main-amount" id="net-worth-display">$0</div>
+                    <div class="net-worth-change" id="net-worth-change"></div>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-main-card assets-main-card">
+                        <h3>Total Assets</h3>
+                        <div class="summary-main-amount" id="total-assets">$0</div>
+                    </div>
+
+                    <div class="summary-main-card liabilities-main-card">
+                        <h3>Total Liabilities</h3>
+                        <div class="summary-main-amount" id="total-liabilities">$0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breakdown Tab -->
+        <div id="breakdown-tab" class="tab-content">
+            <h2 class="section-title">Financial Breakdown</h2>
+            
+            <div class="equity-section">
+                <h3>Equity Summary</h3>
+                <div class="equity-cards">
+                    <div class="equity-card">
+                        <span class="equity-icon">🏡</span>
+                        <span class="equity-label">Real Estate Equity</span>
+                        <span class="equity-value" id="real-estate-equity">$0</span>
+                    </div>
+                    <div class="equity-card">
+                        <span class="equity-icon">🚗</span>
+                        <span class="equity-label">Vehicle Equity</span>
+                        <span class="equity-value" id="vehicle-equity">$0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="breakdown-section">
+                <h3>Assets by Category</h3>
+                <div id="assets-breakdown" class="breakdown-list">
+                    <p class="empty-state">No assets to display</p>
+                </div>
+            </div>
+
+            <div class="breakdown-section">
+                <h3>Liabilities by Category</h3>
+                <div id="liabilities-breakdown" class="breakdown-list">
+                    <p class="empty-state">No liabilities to display</p>
+                </div>
+            </div>
+
+            <div class="snapshots-section">
+                <h3>History</h3>
+                <div class="actions-row">
+                    <button class="btn btn-primary" id="take-snapshot-btn">📸 Take Snapshot</button>
+                </div>
+                <div id="snapshots-list" class="snapshots-list">
+                    <p class="empty-state">No snapshots yet. Take your first snapshot!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Tab -->
+        <div id="manage-tab" class="tab-content">
+            <h2 class="section-title">Manage Your Finances</h2>
+
+        <!-- Manage Tab -->
+        <div id="manage-tab" class="tab-content">
+            <h2 class="section-title">Manage Your Finances</h2>
+            
+            <div class="manage-section">
+                <div class="manage-header">
+                    <h3>Assets</h3>
+                    <button class="btn btn-primary" id="add-asset-btn">+ Add Asset</button>
+                </div>
+                <div id="assets-list" class="items-list">
+                    <p class="empty-state">No assets yet. Click "Add Asset" to get started!</p>
+                </div>
+            </div>
+
+            <div class="manage-section">
+                <div class="manage-header">
+                    <h3>Liabilities</h3>
+                    <button class="btn btn-primary" id="add-liability-btn">+ Add Liability</button>
+                </div>
+                <div id="liabilities-list" class="items-list">
+                    <p class="empty-state">No liabilities yet. Click "Add Liability" to get started!</p>
+                </div>
+            </div>
+
+            <div class="manage-section">
+                <h3>Import Data</h3>
+                <button class="btn btn-secondary" id="import-csv-btn">📥 Import from CSV</button>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings-tab" class="tab-content">
+            <h2>Settings</h2>
+            
+            <div class="settings-section">
+                <h3>Data Management</h3>
+                <button class="btn btn-secondary" id="export-template-btn">📄 Export CSV Template</button>
+                <button class="btn btn-secondary" id="export-data-btn">💾 Export All Data</button>
+                <button class="btn btn-danger" id="delete-all-btn">🗑️ Delete All Data</button>
+            </div>
+
+            <div class="settings-section">
+                <h3>About</h3>
+                <div class="stats-list">
+                    <div class="stat-item">
+                        <span>Version</span>
+                        <span>1.0.0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Total Assets</span>
+                        <span id="stats-assets">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Total Liabilities</span>
+                        <span id="stats-liabilities">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Snapshots Saved</span>
+                        <span id="stats-snapshots">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Instructions</h3>
+                <ul class="instructions-list">
+                    <li>Use the Dashboard to view your net worth summary</li>
+                    <li>Add assets and liabilities using the + button</li>
+                    <li>Link debts to assets to track equity automatically</li>
+                    <li>Take snapshots to track changes over time</li>
+                    <li>Import data using the CSV template format</li>
+                    <li>All data is stored locally in your browser</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Asset Modal -->
+    <div id="asset-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="asset-modal-title">Add Asset</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="asset-form">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" id="asset-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="asset-category" required>
+                        <option value="">Select a category</option>
+                        <option value="Real Estate">🏠 Real Estate</option>
+                        <option value="Vehicle">🚗 Vehicle</option>
+                        <option value="Bank Account">🏦 Bank Account</option>
+                        <option value="Investment Account">📈 Investment Account</option>
+                        <option value="Retirement Account">📅 Retirement Account</option>
+                        <option value="Cash">💵 Cash</option>
+                        <option value="Cryptocurrency">₿ Cryptocurrency</option>
+                        <option value="Business Interest">💼 Business Interest</option>
+                        <option value="Collectibles">🎨 Collectibles</option>
+                        <option value="Jewelry">💎 Jewelry</option>
+                        <option value="Other">📦 Other</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Purchase Date *</label>
+                        <input type="date" id="asset-purchase-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Purchase Price *</label>
+                        <input type="number" id="asset-purchase-price" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Current Value *</label>
+                    <input type="number" id="asset-current-value" step="0.01" required>
+                </div>
+
+                <div class="form-group" id="asset-debt-group" style="display: none;">
+                    <label>Associated Debt</label>
+                    <select id="asset-associated-debt">
+                        <option value="">None</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="asset-notes" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Asset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Liability Modal -->
+    <div id="liability-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="liability-modal-title">Add Liability</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="liability-form">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" id="liability-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="liability-category" required>
+                        <option value="">Select a category</option>
+                        <option value="Mortgage">🏠 Mortgage</option>
+                        <option value="Auto Loan">🚗 Auto Loan</option>
+                        <option value="Student Loan">🎓 Student Loan</option>
+                        <option value="Credit Card">💳 Credit Card</option>
+                        <option value="Personal Loan">👤 Personal Loan</option>
+                        <option value="Business Loan">💼 Business Loan</option>
+                        <option value="Medical Debt">🏥 Medical Debt</option>
+                        <option value="Other">📄 Other</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Original Amount *</label>
+                        <input type="number" id="liability-original-amount" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Current Balance *</label>
+                        <input type="number" id="liability-current-balance" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Interest Rate (%)</label>
+                        <input type="number" id="liability-interest-rate" step="0.01" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Start Date *</label>
+                        <input type="date" id="liability-start-date" required>
+                    </div>
+                </div>
+
+                <div class="form-group" id="liability-asset-group" style="display: none;">
+                    <label>Associated Asset</label>
+                    <select id="liability-associated-asset">
+                        <option value="">None</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="liability-notes" rows="3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Liability</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CSV Import Modal -->
+    <div id="import-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Import from CSV</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Select a CSV file to import. The file should follow the template format.</p>
+                <input type="file" id="csv-file-input" accept=".csv">
+                <div id="import-result" class="import-result"></div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary cancel-btn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="process-import-btn" disabled>Import</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
